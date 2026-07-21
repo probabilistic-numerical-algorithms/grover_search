@@ -1,0 +1,112 @@
+make[1]: Entering directory '/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada'
+gnatmake -I../../lwt -gnat2022 -gnatX test_grover \
+  -cargs -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt
+gcc -c -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt test_grover.adb
+grover_search.adb:65:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:65:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:65:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:161:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:161:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:161:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:93:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:91:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:125:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:123:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:198:10: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:208:23: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:203:31: optimized: basic block part vectorized using 64 byte vectors
+grover_search.adb:212:34: optimized: basic block part vectorized using 64 byte vectors
+grover_search.adb:220:13: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:227:20: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:198:10: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:208:23: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:203:31: optimized: basic block part vectorized using 64 byte vectors
+grover_search.adb:212:34: optimized: basic block part vectorized using 64 byte vectors
+grover_search.adb:220:13: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:227:20: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:20:7: optimized: basic block part vectorized using 16 byte vectors
+test_grover.adb:73:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:61:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:91:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:61:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:115:13: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:61:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:61:7: optimized: basic block part vectorized using 8 byte vectors
+gcc -c -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt grover_search.adb
+gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:63:7: optimized: basic block part vectorized using 8 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 8 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 16 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 32 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 8 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 16 byte vectors
+gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt.ads
+gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-scheduler.adb
+/home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-scheduler.adb:335:7: optimized: basic block part vectorized using 16 byte vectors
+gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-storage.adb
+gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-aspects.ads
+gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-statistics.ads
+gnatbind -I../../lwt -x test_grover.ali
+gnatlink test_grover.ali
+/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
+make[1]: Leaving directory '/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada'
+=============================================================
+  GROVER'S RESONANT SEARCH COMPREHENSIVE TEST SUITE (ADA 2022)
+=============================================================
+
+Register layout (Max Entropy Initial State):
+  M 0: 'IS'
+  M 1: 'THE'
+  M 2: 'INSIGHT'
+  M 3: 'OF'
+  M 4: 'PHYSICS'
+  M 5: 'PURPOSE'
+  M 6: 'TRUTH'
+  M 7: 'BEAUTY'
+
+-------------------------------------------------------------
+TEST: Baseline Target Verification (Target = 'PHYSICS', Index 4)
+-------------------------------------------------------------
+Searching via predicate for index 4 ('PHYSICS')...
+SUCCESS: Correctly found index 4 with retrieved word: 'PHYSICS'
+
+-------------------------------------------------------------
+TEST: Exhaustive Position Coverage Scan (M0 through M7)
+-------------------------------------------------------------
+  - Target M 0 ('IS') -> FOUND correctly.
+  - Target M 1 ('THE') -> FOUND correctly.
+  - Target M 2 ('INSIGHT') -> FOUND correctly.
+  - Target M 3 ('OF') -> FOUND correctly.
+  - Target M 4 ('PHYSICS') -> FOUND correctly.
+  - Target M 5 ('PURPOSE') -> FOUND correctly.
+  - Target M 6 ('TRUTH') -> FOUND correctly.
+  - Target M 7 ('BEAUTY') -> FOUND correctly.
+SUCCESS: Exhaustive scan of all 8 positions passed successfully!
+
+-------------------------------------------------------------
+TEST: Statistical Performance Sweep (100 Trials, Target = 'TRUTH' at M6)
+-------------------------------------------------------------
+Total trials run:  100
+Successful acquisitions:  100
+Empirical success rate:  1.00000000000000E+02%
+SUCCESS: Perfect 100% robust acquisition rate under phase noise!
+
+-------------------------------------------------------------
+TEST: Graceful Termination on Non-Existent Target
+-------------------------------------------------------------
+Executing search on non-existent target (expecting termination)...
+SUCCESS: Search terminated gracefully after max retry attempts, returned 0.
+
+=============================================================
+  TEST SUITE RESULTS
+=============================================================
+Tests run:   4
+Tests passed: 4
+OVERALL STATUS: ALL TESTS PASSED
+=============================================================
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s
