@@ -38,10 +38,8 @@ procedure test_grover is
    with
      pre => index <= 100
    is
-      result : boolean := false;
    begin
-      result := (index = active_target_index);
-      return result;
+     return (index = active_target_index);
    end my_predicate;
 
    --  Instantiate the generic Grover's Search package with our predicate

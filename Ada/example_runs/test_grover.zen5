@@ -1,55 +1,60 @@
 make[1]: Entering directory '/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada'
-gnatmake -I../../lwt -gnat2022 -gnatX test_grover \
-  -cargs -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt
-gcc -c -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt test_grover.adb
-grover_search.adb:28:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
-grover_search.adb:28:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
-grover_search.adb:28:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
-grover_search.adb:124:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
-grover_search.adb:124:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
-grover_search.adb:124:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
-grover_search.adb:56:25: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:54:25: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:88:25: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:86:25: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:153:10: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:163:23: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:167:34: optimized: basic block part vectorized using 64 byte vectors
-grover_search.adb:175:13: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:182:20: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:153:10: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:163:23: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:167:34: optimized: basic block part vectorized using 64 byte vectors
-grover_search.adb:175:13: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:182:20: optimized: basic block part vectorized using 8 byte vectors
+gnatmake -I../../lwt test_grover -cargs -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -largs -lgomp
+gcc -c -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 test_grover.adb
+grover_search.adb:62:19: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:62:19: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:62:19: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:186:25: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:186:25: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:186:25: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:151:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:151:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:151:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+(null):0:0: optimized: basic block part vectorized using 16 byte vectors
+grover_search.adb:87:24: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:85:24: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:122:16: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:118:16: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:245:11: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:245:11: optimized: epilogue loop vectorized using 32 byte vectors and unroll factor 8
+grover_search.adb:245:11: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 4
+grover_search.adb:245:11: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:245:11: optimized: epilogue loop vectorized using 32 byte vectors and unroll factor 8
+grover_search.adb:245:11: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 4
 test_grover.adb:20:7: optimized: basic block part vectorized using 16 byte vectors
-test_grover.adb:74:7: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:62:7: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:92:7: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:62:7: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:118:13: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:72:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:60:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:90:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:60:7: optimized: basic block part vectorized using 8 byte vectors
 test_grover.adb:116:13: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:62:7: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:158:7: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:164:10: optimized: basic block part vectorized using 8 byte vectors
-test_grover.adb:62:7: optimized: basic block part vectorized using 8 byte vectors
-gcc -c -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt entropy.adb
-gcc -c -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt grover_search.adb
-gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb
+test_grover.adb:114:13: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:60:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:156:7: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:162:10: optimized: basic block part vectorized using 8 byte vectors
+test_grover.adb:60:7: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:62:19: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:62:19: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:186:25: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:186:25: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:151:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:151:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+gcc -c -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 entropy.adb
+gcc -c -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 grover_search.adb
+gcc -c -I./ -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:63:7: optimized: basic block part vectorized using 8 byte vectors
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 8 byte vectors
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 16 byte vectors
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 32 byte vectors
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 8 byte vectors
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-parallelism.adb:60:12: optimized: basic block part vectorized using 16 byte vectors
-gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt.ads
-gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-scheduler.adb
+gcc -c -I./ -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt.ads
+gcc -c -I./ -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-scheduler.adb
 /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-scheduler.adb:335:7: optimized: basic block part vectorized using 16 byte vectors
-gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-storage.adb
-gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-aspects.ads
-gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-statistics.ads
+gcc -c -I./ -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-storage.adb
+gcc -c -I./ -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-aspects.ads
+gcc -c -I./ -I../../lwt -mno-rdseed -O3 -gnat2022 -gnatX -fomit-frame-pointer -ftree-vectorize -fopt-info-vec -ftree-parallelize-loops=24 -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-statistics.ads
 gnatbind -I../../lwt -x test_grover.ali
-gnatlink test_grover.ali
+gnatlink test_grover.ali -lgomp
 /home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
 /home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
 make[1]: Leaving directory '/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada'
