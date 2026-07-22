@@ -1,4 +1,5 @@
 .DELETE_ON_ERROR:
+.PHONY: clean
 
 LIBRARY_PATH := $(LIBRARY_PATH):/usr/local/lib
 PATH := $(HOME)/src/probabilistic-numerical-algorithms/gnat2022-parallel-binary/bin:$(PATH)
@@ -9,10 +10,27 @@ GROVER_SOURCES := \
  entropy.ads entropy.adb
 TEST_GROVER_SOURCES := \
  test_grover.adb $(GROVER_SOURCES)
+TEST_SHUFFLES_SOURCES := \
+ test_shuffles.adb $(GROVER_SOURCES)
+DEMO_ENTROPY_SOURCES := \
+ demo_entropy.adb entropy.ads entropy.adb
 
 test_grover: $(TEST_GROVER_SOURCES)
-	gnatmake -I$(LWT_PATH) -gnat2022 -gnatX $(@) \
-	  -cargs -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt
+	gnatmake -I$(LWT_PATH) $(@) \
+	  -cargs -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -gnatX
+clean::
+	-rm -f test_grover
+
+test_shuffles: $(TEST_SHUFFLES_SOURCES)
+	gnatmake -I$(LWT_PATH) $(@) \
+	  -cargs -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -gnatX
+clean::
+	-rm -f test_shuffles
+
+demo_entropy: $(DEMO_ENTROPY_SOURCES)
+	gnatmake $(@) -cargs -gnata -gnato1
+clean::
+	-rm -f demo_entropy
 
 example_runs/test_grover.zen5: $(TEST_GROVER_SOURCES)
 	mkdir -p $(@D)
@@ -22,8 +40,6 @@ example_runs/test_grover.zen5: $(TEST_GROVER_SOURCES)
 	cat $(@).tmp $(@).time.tmp > $(@)
 	rm $(@).tmp $(@).time.tmp
 
-.PHONY: clean
 clean::
 	-rm -f *.{o,ali}
 	-rm -f *.tmp */*.tmp
-	-rm -f test_grover
