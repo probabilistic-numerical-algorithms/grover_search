@@ -2,26 +2,26 @@ make[1]: Entering directory '/home/trashman/src/probabilistic-numerical-algorith
 gnatmake -I../../lwt -gnat2022 -gnatX test_grover \
   -cargs -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt
 gcc -c -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt test_grover.adb
-grover_search.adb:30:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
-grover_search.adb:30:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
-grover_search.adb:30:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
-grover_search.adb:126:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
-grover_search.adb:126:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
-grover_search.adb:126:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
-grover_search.adb:58:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:28:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:28:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:28:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
+grover_search.adb:124:20: optimized: loop vectorized using 64 byte vectors and unroll factor 8
+grover_search.adb:124:20: optimized: epilogue loop vectorized using masked 64 byte vectors and unroll factor 8
+grover_search.adb:124:20: optimized: loop vectorized using 64 byte vectors and unroll factor 16
 grover_search.adb:56:25: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:90:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:54:25: optimized: basic block part vectorized using 8 byte vectors
 grover_search.adb:88:25: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:163:10: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:173:23: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:177:34: optimized: basic block part vectorized using 64 byte vectors
-grover_search.adb:185:13: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:192:20: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:163:10: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:173:23: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:177:34: optimized: basic block part vectorized using 64 byte vectors
-grover_search.adb:185:13: optimized: basic block part vectorized using 8 byte vectors
-grover_search.adb:192:20: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:86:25: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:153:10: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:163:23: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:167:34: optimized: basic block part vectorized using 64 byte vectors
+grover_search.adb:175:13: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:182:20: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:153:10: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:163:23: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:167:34: optimized: basic block part vectorized using 64 byte vectors
+grover_search.adb:175:13: optimized: basic block part vectorized using 8 byte vectors
+grover_search.adb:182:20: optimized: basic block part vectorized using 8 byte vectors
 test_grover.adb:20:7: optimized: basic block part vectorized using 16 byte vectors
 test_grover.adb:73:7: optimized: basic block part vectorized using 8 byte vectors
 test_grover.adb:61:7: optimized: basic block part vectorized using 8 byte vectors
@@ -50,9 +50,8 @@ gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-
 gcc -c -I./ -I../../lwt -gnat2022 -gnatX -O3 -mno-rdseed -ftree-vectorize -fopt-info-vec -llwt -I- /home/trashman/src/probabilistic-numerical-algorithms/lwt/lwt-statistics.ads
 gnatbind -I../../lwt -x test_grover.ali
 gnatlink test_grover.ali
-/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:220:49: optimized: basic block part vectorized using 4 byte vectors
-/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:220:49: optimized: basic block part vectorized using 4 byte vectors
-/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:220:49: optimized: basic block part vectorized using 4 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
+/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada/b~test_grover.adb:219:49: optimized: basic block part vectorized using 4 byte vectors
 make[1]: Leaving directory '/home/trashman/src/probabilistic-numerical-algorithms/grover_search/Ada'
 =============================================================
   GROVER'S RESONANT SEARCH COMPREHENSIVE TEST SUITE (ADA 2022)
@@ -109,6 +108,6 @@ Tests passed: 4
 OVERALL STATUS: ALL TESTS PASSED
 =============================================================
 
-real	0m0.003s
-user	0m0.001s
-sys	0m0.002s
+real	0m0.002s
+user	0m0.002s
+sys	0m0.001s

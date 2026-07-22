@@ -5,8 +5,6 @@
 pragma ada_2022;
 
 with ada.numerics.generic_elementary_functions;
-with interfaces;
-with ada.calendar;
 with entropy;
 
 package body grover_search is
@@ -148,14 +146,6 @@ package body grover_search is
       measured_idx : natural := 0;
       found : boolean := false;
       result_idx : natural := 0;
-      
-      use ada.calendar;
-      use type interfaces.unsigned_64;
-      t : time := clock;
-      state : interfaces.unsigned_64 :=
-      	    interfaces.unsigned_64 (float (seconds (t)) * 1000.0) +
-	    interfaces.unsigned_64 (interfaces.unsigned_64(n) mod
-	    			    interfaces.unsigned_64 (4294967296));
    begin
       
       while not found and attempts <= max_attempts loop
