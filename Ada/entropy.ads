@@ -11,8 +11,7 @@ package entropy is
     function get return entropy_seed;
     procedure update;
   private
-    -- The SI charge constant (to within orders of magnitude).
-    value : entropy_seed := 1_602_176_634;
+    value : entropy_seed := 0;
   end safe_seed;
 
   global_seed : safe_seed;
