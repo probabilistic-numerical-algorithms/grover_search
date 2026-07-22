@@ -1,4 +1,5 @@
 .*~$
+.*\.orig$
 .*\.(o|ali)$
 ^Ada/test_grover$
 ^Ada/test_shuffles$
