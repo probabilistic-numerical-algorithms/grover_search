@@ -1,0 +1,28 @@
+= Grover’s search algorithm
+
+This is Lov Grover’s famous search algorithm that runs in
+approximately (π/4)√N time. To get that speed requires parallel
+hardware.
+
+Grover designed the algorithm for hybrid computers made of
+superconducting components. There is a theory that such hardware
+attracts invisible tooth fairies who hold hands and make the algorithm
+function. Actually the mathematics is the same no matter how you
+construct the hardware. You could make it in silicon from linear CMOS
+or operational amplifiers. However, it makes a lot more sense to use a
+digital computer.
+
+The unusual speed of the algorithm comes from it being a parallel
+numerical algorithm that does what interconnected resonant analog
+circuits would do.
+
+There is no such thing as an entangled tooth fairy. Quantum theory is
+nonsense. When it was taught to me in the 1980s with explicit orders
+not to think, and just do the calculations, that was a sign something
+was amiss. Quantum theory is a cause of cerebral paralysis and should
+be banned by university faculties.
+
+IMPORTANT: I AM A DISABLED SENIOR CITIZEN. PLEASE DO NOT BOTHER ME.
+ALL OF THIS STUFF IS DONATED TO THE PUBLIC DOMAIN FOR OTHERS TO DEAL
+WITH WHILE LEAVING ME ALONE. You can read snapshots of my research at
+https://archive.org/details/unified-field-theory/
