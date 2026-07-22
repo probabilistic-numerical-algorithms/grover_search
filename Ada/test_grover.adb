@@ -45,7 +45,8 @@ procedure test_grover is
    end my_predicate;
 
    --  Instantiate the generic Grover's Search package with our predicate
-   package solver is new grover_search (predicate => my_predicate);
+   package solver is
+     new grover_search (real => real, predicate => my_predicate);
 
    result_index : natural;
    pass_count   : natural := 0;

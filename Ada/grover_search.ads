@@ -37,10 +37,10 @@
 pragma ada_2022;
 
 generic
+   type real is digits <>;
    with function predicate (index : natural) return boolean;
 package grover_search is
 
-   type real is new long_float;
    type amplitude_array is array (natural range <>) of real;
 
    --  Subprogram to run the entire Grover's search algorithm.
