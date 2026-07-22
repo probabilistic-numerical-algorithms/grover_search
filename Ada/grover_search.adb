@@ -5,8 +5,9 @@
 pragma ada_2022;
 
 with ada.numerics.generic_elementary_functions;
-with Interfaces;
-with Ada.Calendar;
+with interfaces;
+with ada.calendar;
+with entropy;
 
 package body grover_search is
 
@@ -14,44 +15,8 @@ package body grover_search is
            new ada.numerics.generic_elementary_functions (real);
    use real_math;
 
-   ---------------------------------------------------------------------
-   --
-   -- A linear congruential generator.
-   --
-
-  type uint64 is mod 2 ** 64;
-
-  -- The multiplier lcg_a comes from Steele, Guy; Vigna, Sebastiano (28
-  -- September 2021). ‘Computationally easy, spectrally good multipliers
-  -- for congruential pseudorandom number generators’.
-  -- arXiv:2001.05304v3 [cs.DS]
-
-  lcg_a : constant uint64 := 16#F1357AEA2E62A9C5#;
-
-  -- The value of lcg_c is not critical, but should be odd. A number
-  -- taken from https://oeis.org/A000111 for no good reason.
-
-  lcg_c : constant uint64 := 19391512145;
-
-  seed  : uint64 := 0;
-
-  --
-  -- uniform_real: returns a non-negative real less than 1.
-  --
-  function uniform_real
-  return real
-  with post => 0.0 <= uniform_real'result
-                 and uniform_real'result < 1.0 is
-    randval : real;
-  begin
-    -- Take the high 48 bits of the seed and divide it by 2**48.
-    randval := real (seed / (2**16)) / real (2**48);
-
-    -- Update the seed.
-    seed := (lcg_a * seed) + lcg_c;
-
-    return randval;
-  end uniform_real;
+   package real_entropy is new entropy (real);
+   use real_entropy;
 
    ----------------
    -- Initialize --
