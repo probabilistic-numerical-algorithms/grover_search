@@ -36,64 +36,64 @@ package body grover_search is
    -- Sum_Recursive --
    -------------------
 
-   function Sum_Recursive (Amplitudes : Amplitude_Array) return Real
+   function sum_recursive (amplitudes : amplitude_array) return real
      with
-       Pre  => Amplitudes'Length > 0,
-       Post => (if Amplitudes'Length = 1 then
-            Sum_Recursive'Result = Amplitudes (Amplitudes'First))
+       pre  => amplitudes'length > 0,
+       post => (if amplitudes'length = 1 then
+            sum_recursive'result = amplitudes (amplitudes'first))
    is
-      Result : Real := 0.0;
+      result : real := 0.0;
    begin
-      if Amplitudes'Length = 1 then
-         Result := Amplitudes (Amplitudes'First);
-      elsif Amplitudes'Length > 1 then
+      if amplitudes'length = 1 then
+         result := amplitudes (amplitudes'first);
+      elsif amplitudes'length > 1 then
          declare
-            Mid   : constant Integer := Amplitudes'First + (Amplitudes'Length / 2) - 1;
-            Left  : Real;
-            Right : Real;
+            mid   : constant integer := amplitudes'first + (amplitudes'length / 2) - 1;
+            left  : real;
+            right : real;
          begin
             parallel do
-               Left  := Sum_Recursive (Amplitudes (Amplitudes'First .. Mid));
+               left  := sum_recursive (amplitudes (amplitudes'first .. mid));
             and
-               Right := Sum_Recursive (Amplitudes (Mid + 1 .. Amplitudes'Last));
+               right := sum_recursive (amplitudes (mid + 1 .. amplitudes'last));
             end do;
-            Result := Left + Right;
+            result := left + right;
          end;
       end if;
-      return Result;
-   end Sum_Recursive;
+      return result;
+   end sum_recursive;
 
    ----------------------
    -- Sum_Sq_Recursive --
    ----------------------
 
-   function Sum_Sq_Recursive (Amplitudes : Amplitude_Array) return Real
+   function sum_sq_recursive (amplitudes : amplitude_array) return real
      with
-       Pre  => Amplitudes'Length > 0,
-       Post => (if Amplitudes'Length = 1 then
-            Sum_Sq_Recursive'Result =
-                 Amplitudes (Amplitudes'First) * Amplitudes (Amplitudes'First))
+       pre  => amplitudes'length > 0,
+       post => (if amplitudes'length = 1 then
+            sum_sq_recursive'result =
+                 amplitudes (amplitudes'first) * amplitudes (amplitudes'first))
    is
-      Result : Real := 0.0;
+      result : real := 0.0;
    begin
-      if Amplitudes'Length = 1 then
-         Result := Amplitudes (Amplitudes'First) * Amplitudes (Amplitudes'First);
-      elsif Amplitudes'Length > 1 then
+      if amplitudes'length = 1 then
+         result := amplitudes (amplitudes'first) * amplitudes (amplitudes'first);
+      elsif amplitudes'length > 1 then
          declare
-            Mid   : constant Integer := Amplitudes'First + (Amplitudes'Length / 2) - 1;
-            Left  : Real;
-            Right : Real;
+            mid   : constant integer := amplitudes'first + (amplitudes'length / 2) - 1;
+            left  : real;
+            right : real;
          begin
             parallel do
-               Left  := Sum_Sq_Recursive (Amplitudes (Amplitudes'First .. Mid));
+               left  := sum_sq_recursive (amplitudes (amplitudes'first .. mid));
             and
-               Right := Sum_Sq_Recursive (Amplitudes (Mid + 1 .. Amplitudes'Last));
+               right := sum_sq_recursive (amplitudes (mid + 1 .. amplitudes'last));
             end do;
-            Result := Left + Right;
+            result := left + right;
          end;
       end if;
-      return Result;
-   end Sum_Sq_Recursive;
+      return result;
+   end sum_sq_recursive;
 
    ---------------------
    -- Apply_predicate --
@@ -118,7 +118,7 @@ package body grover_search is
       mean : real;
    begin
       --  Compute the spatial average (mean amplitude) using parallel tree reduction
-      sum := Sum_Recursive (amplitudes);
+      sum := sum_recursive (amplitudes);
       
       mean := sum / real (amplitudes'length);
 
@@ -149,13 +149,13 @@ package body grover_search is
       found : boolean := false;
       result_idx : natural := 0;
       
-      use Ada.Calendar;
-      use type Interfaces.Unsigned_64;
-      T : Time := Clock;
-      State : Interfaces.Unsigned_64 :=
-      	    Interfaces.Unsigned_64 (Float (Seconds (T)) * 1000.0) +
-	    Interfaces.Unsigned_64 (Interfaces.Unsigned_64(n) mod
-	    			    Interfaces.Unsigned_64 (4294967296));
+      use ada.calendar;
+      use type interfaces.unsigned_64;
+      t : time := clock;
+      state : interfaces.unsigned_64 :=
+      	    interfaces.unsigned_64 (float (seconds (t)) * 1000.0) +
+	    interfaces.unsigned_64 (interfaces.unsigned_64(n) mod
+	    			    interfaces.unsigned_64 (4294967296));
    begin
       
       while not found and attempts <= max_attempts loop
@@ -170,7 +170,7 @@ package body grover_search is
             end loop;
             
             --  Normalize after perturbation using parallel tree reduction
-            sum_sq := Sum_Sq_Recursive (amplitudes);
+            sum_sq := sum_sq_recursive (amplitudes);
             if sum_sq > 0.0 then
                factor := 1.0 / sqrt (sum_sq);
                for i in amplitudes'range loop
@@ -189,7 +189,7 @@ package body grover_search is
          r_val := uniform_real;
          
          --  Compute total sum of squares for safe normalization using parallel tree reduction
-         sum_sq := Sum_Sq_Recursive (amplitudes);
+         sum_sq := sum_sq_recursive (amplitudes);
          
          declare
             cumulative : real := 0.0;

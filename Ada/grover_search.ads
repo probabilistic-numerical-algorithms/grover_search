@@ -34,10 +34,10 @@
 --     - Search: 1 while-loop, 1 for-loop, 2 conditionals -> d = 4 -> m = d + 1 = 5 <= 10.
 --  ========================================================================
 
-pragma Ada_2022;
+pragma ada_2022;
 
 generic
-   with function Predicate (Index : Natural) return Boolean;
+   with function predicate (index : natural) return boolean;
 package grover_search is
 
    type real is new long_float;
@@ -70,6 +70,7 @@ package grover_search is
    procedure apply_diffusion (amplitudes : in out amplitude_array)
    with
      pre  => amplitudes'length > 0,
-     post => amplitudes'first = amplitudes'old'first and amplitudes'last = amplitudes'old'last;
+     post => (amplitudes'first = amplitudes'old'first
+              and amplitudes'last = amplitudes'old'last);
 
 end grover_search;

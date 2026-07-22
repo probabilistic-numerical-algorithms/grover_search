@@ -1,7 +1,7 @@
 pragma ada_2022;
 
 with ada.text_io; use ada.text_io;
-with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with ada.strings.unbounded; use ada.strings.unbounded;
 with grover_search;
 
 procedure test_grover is
@@ -10,27 +10,27 @@ procedure test_grover is
 
    --  A dynamic target index used by the predicate to support multiple tests
    --  without needing multiple package instantiations.
-   Active_Target_Index : natural := 4;
+   active_target_index : natural := 4;
 
    --  A robust dictionary mapping indexes to words
    function get_word (index : natural) return string
    with
      pre => index in 0 .. 7 | 99
    is
-      Result : Unbounded_String;
+      result : unbounded_string;
    begin
       case index is
-         when 0 => Result := To_Unbounded_String ("IS");
-         when 1 => Result := To_Unbounded_String ("THE");
-         when 2 => Result := To_Unbounded_String ("INSIGHT");
-         when 3 => Result := To_Unbounded_String ("OF");
-         when 4 => Result := To_Unbounded_String ("PHYSICS");
-         when 5 => Result := To_Unbounded_String ("PURPOSE");
-         when 6 => Result := To_Unbounded_String ("TRUTH");
-         when 7 => Result := To_Unbounded_String ("BEAUTY");
-         when others => Result := Null_Unbounded_String;
+         when 0 => result := to_unbounded_string ("IS");
+         when 1 => result := to_unbounded_string ("THE");
+         when 2 => result := to_unbounded_string ("INSIGHT");
+         when 3 => result := to_unbounded_string ("OF");
+         when 4 => result := to_unbounded_string ("PHYSICS");
+         when 5 => result := to_unbounded_string ("PURPOSE");
+         when 6 => result := to_unbounded_string ("TRUTH");
+         when 7 => result := to_unbounded_string ("BEAUTY");
+         when others => result := null_unbounded_string;
       end case;
-      return To_String (Result);
+      return to_string (result);
    end get_word;
 
    --  Our predicate function matching the generic signature
@@ -38,10 +38,10 @@ procedure test_grover is
    with
      pre => index <= 100
    is
-      Result : Boolean := False;
+      result : boolean := false;
    begin
-      Result := (index = Active_Target_Index);
-      return Result;
+      result := (index = active_target_index);
+      return result;
    end my_predicate;
 
    --  Instantiate the generic Grover's Search package with our predicate
@@ -79,7 +79,7 @@ begin
    --------------------------------------------------------------------------
    test_count := test_count + 1;
    print_header ("Baseline Target Verification (Target = 'PHYSICS', Index 4)");
-   Active_Target_Index := 4;
+   active_target_index := 4;
    
    put_line ("Searching via predicate for index 4 ('PHYSICS')...");
    result_index := solver.search
@@ -105,7 +105,7 @@ begin
       scan_success : boolean := true;
    begin
       for i in 0 .. 7 loop
-         Active_Target_Index := i;
+         active_target_index := i;
          result_index := solver.search
            (n            => 8,
             iterations   => 2,
@@ -170,7 +170,7 @@ begin
    --------------------------------------------------------------------------
    test_count := test_count + 1;
    print_header ("Graceful Termination on Non-Existent Target");
-   Active_Target_Index := 99; -- Outside standard 0 .. 7 bounds, predicate never true
+   active_target_index := 99; -- Outside standard 0 .. 7 bounds, predicate never true
    
    put_line ("Executing search on non-existent target (expecting termination)...");
    result_index := solver.search
