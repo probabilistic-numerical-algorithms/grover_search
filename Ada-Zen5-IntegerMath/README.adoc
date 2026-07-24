@@ -17,12 +17,14 @@ export GNAT_PARALLEL_STACK_SIZE=8388608
 
 Here are results from an example run on my mini-PC:
 
+----
 Array size:  1048576
 Match locked at index:  3000
 Pass loop limit:  804
 Actual iterations run:  2
 Hardware clock cycles consumed:  6618600
 Approximate time consumed:  0.003315990 s
+----
 
 The time in seconds includes the time spent computing hardware clock
 cycles.
