@@ -52,25 +52,40 @@ package body Grover_Fixed_Processor is
       end loop;
    end Parallel_Oracle_Zen5;
 
-   procedure Parallel_Diffusion_Zen5 (Amplitudes : in out Fixed_Amplitude_Array) is
-      Sum_Total : Long_Integer := 0;
-      Mean      : Integer;
-      -- Define N explicitly as a Long_Integer constant
-      N         : constant Long_Integer := 1_048_576; 
+   procedure Parallel_Diffusion_Zen5 (
+      Amplitudes  : in out Fixed_Amplitude_Array;
+      Match_Found :    out Boolean;
+      Peak_Index  :    out Index_Type) 
+   is
+      Sum_Total   : Long_Integer := 0;
+      Mean        : Integer;
+      N           : constant Long_Integer := 1_048_576;
+
+      -- Thread-local trackers for the parallel loop block
+      Local_Found : Boolean := False;
+      Local_Idx   : Index_Type := 0;
    begin
-      -- 1. Parallel reduction integer accumulation pass
+      -- 1. Parallel reduction to compute the current mean
       parallel for I in Index_Type loop
          Sum_Total := @ + Long_Integer (Amplitudes(I));
       end loop;
 
-      -- 2. Native power-of-two division. GNAT automatically compiles this
-      -- into a branchless Arithmetic Right Shift (SAR) instruction.
       Mean := Integer (Sum_Total / N);
 
-      -- 3. Inversion about the average
+      -- 2. Combined reflection and inline numerical threshold scan
       parallel for I in Index_Type loop
-        Amplitudes(I) := (2 * Mean) - Amplitudes(I);
+         Amplitudes(I) := (2 * Mean) - Amplitudes(I);
+
+         -- If any amplitude spikes past 256, resonance is locked.
+         if Abs (Amplitudes(I)) > 256 then
+            Local_Idx   := I;
+            Local_Found := True;
+         end if;
       end loop;
+
+      -- 3. Return the flags back up to the driver loop
+      Match_Found := Local_Found;
+      Peak_Index  := Local_Idx;
    end Parallel_Diffusion_Zen5;
 
    procedure Find_Peak (
@@ -109,39 +124,39 @@ package body Grover_Fixed_Processor is
 --      Peak_Index := Global_Peak.Idx;
 --   end Find_Peak;
 
-   procedure Execute_Search_Benchmark (
-      Data          : in     Data_Array;
-      Target        : in     Integer;
-      Found_Index   :    out Index_Type;
-      Success       :    out Boolean;
-      Elapsed_Time  :    out Ada.Real_Time.Time_Span) 
-   is
-      -- Free the memory safely when done
-      procedure Free is new Ada.Unchecked_Deallocation 
-        (Object => Fixed_Amplitude_Array, Name => Amplitude_Pointer);
-
-      -- Allocate directly onto the heap, leaving the system stack completely empty
-      Amplitudes  : Amplitude_Pointer := new Fixed_Amplitude_Array;
-      Start_Clock : Ada.Real_Time.Time;
-      End_Clock   : Ada.Real_Time.Time;
-   begin
-      Initialize_Amplitudes (Amplitudes.all);
-
-      Start_Clock := Ada.Real_Time.Clock;
-
-      for Step in 1 .. Iterations loop
-         Parallel_Oracle_Zen5 (Data, Target, Amplitudes.all);
-         Parallel_Diffusion_Zen5 (Amplitudes.all);
-      end loop;
-
-      End_Clock := Ada.Real_Time.Clock;
-      Elapsed_Time := End_Clock - Start_Clock;
-
-      Find_Peak (Amplitudes.all, Found_Index);
-      Success := (Data(Found_Index) = Target);
-
-      -- Explicitly release the heap space
-      Free (Amplitudes);
-   end Execute_Search_Benchmark;
+--   procedure Execute_Search_Benchmark (
+--      Data          : in     Data_Array;
+--      Target        : in     Integer;
+--      Found_Index   :    out Index_Type;
+--      Success       :    out Boolean;
+--      Elapsed_Time  :    out Ada.Real_Time.Time_Span) 
+--   is
+--      -- Free the memory safely when done
+--      procedure Free is new Ada.Unchecked_Deallocation 
+--        (Object => Fixed_Amplitude_Array, Name => Amplitude_Pointer);
+--
+--      -- Allocate directly onto the heap, leaving the system stack completely empty
+--      Amplitudes  : Amplitude_Pointer := new Fixed_Amplitude_Array;
+--      Start_Clock : Ada.Real_Time.Time;
+--      End_Clock   : Ada.Real_Time.Time;
+--   begin
+--      Initialize_Amplitudes (Amplitudes.all);
+--
+--      Start_Clock := Ada.Real_Time.Clock;
+--
+--      for Step in 1 .. Iterations loop
+--         Parallel_Oracle_Zen5 (Data, Target, Amplitudes.all);
+--         Parallel_Diffusion_Zen5 (Amplitudes.all);
+--      end loop;
+--
+--      End_Clock := Ada.Real_Time.Clock;
+--      Elapsed_Time := End_Clock - Start_Clock;
+--
+--      Find_Peak (Amplitudes.all, Found_Index);
+--      Success := (Data(Found_Index) = Target);
+--
+--      -- Explicitly release the heap space
+--      Free (Amplitudes);
+--   end Execute_Search_Benchmark;
 
 end Grover_Fixed_Processor;

@@ -1,4 +1,4 @@
-pragma ada_2022;
+pragma Ada_2022;
 
 with System.Machine_Code;
 with Grover_Fixed_Types;     use Grover_Fixed_Types;
@@ -42,8 +42,12 @@ procedure Search_Driver is
    Elapsed_Span : Time_Span;
    SI_Seconds   : Duration;
 
+   -- Early termination runtime control flags
+   Early_Term_Found : Boolean    := False;
+   Early_Term_Index : Index_Type := 0;
+   Actual_Steps     : Integer    := 0;
+
    function Read_CPU_Cycles return Unsigned_64;
-   -- Inline assembler to pull the low and high 32-bit registers from RDTSC
    pragma Machine_Attribute (Read_CPU_Cycles, "inline_always");
 
    function Read_CPU_Cycles return Unsigned_64 is
@@ -61,10 +65,12 @@ procedure Search_Driver is
    end Read_CPU_Cycles;
 
 begin
-   -- [Populate Data Array here and insert Target_Val at multiple indices]
-   for i in index_type loop
+   -- Populate Data Array
+   for i in Index_Type loop
       Data(i) := uniform_integer (0, 3999);
    end loop;
+   
+   -- Insert three identical targets
    Data(1000) := Target_Val;
    Data(2000) := Target_Val;
    Data(3000) := Target_Val;
@@ -72,14 +78,23 @@ begin
    for Pass in Target_Guesses loop
       Initialize_Amplitudes (Amplitudes);
       Current_Loop := Get_Loop_Count (Pass);
+      Early_Term_Found := False;
+      Actual_Steps     := 0;
 
       -- START TELEMETRY CLOCK
       Start_Cycles := Read_CPU_Cycles;
       Start_Clock := Clock;
 
       for Step in 1 .. Current_Loop loop
+         Actual_Steps := Step;
+         
          Parallel_Oracle_Zen5 (Data, Target_Val, Amplitudes);
-         Parallel_Diffusion_Zen5 (Amplitudes);
+         
+         -- Diffusion pass now monitors signal growth inline
+         Parallel_Diffusion_Zen5 (Amplitudes, Early_Term_Found, Early_Term_Index);
+         
+         -- Instant classical breakout if resonance condition is met
+         exit when Early_Term_Found;
       end loop;
 
       -- STOP TELEMETRY CLOCK
@@ -88,14 +103,22 @@ begin
       End_Clock := Clock;
       Elapsed_Span := End_Clock - Start_Clock;
 
-      Find_Peak (Amplitudes, Found_Index);
+      -- Determine which index matched
+      if Early_Term_Found then
+         Found_Index := Early_Term_Index;
+      else
+         Find_Peak (Amplitudes, Found_Index);
+      end if;
 
       if Data(Found_Index) = Target_Val then
          Success := True;
          SI_Seconds := To_Duration (Elapsed_Span);
+         
          Put_Line ("Array size: " & Integer'Image (Index_Type'Range_Length));
          Put_Line ("Match locked at index: " & Index_Type'Image (Found_Index));
-         Put_Line ("Pass iterations: " & Integer'Image (Current_Loop));
+         Put_Line ("Pass loop limit: " & Integer'Image (Current_Loop));
+         Put_Line ("Actual iterations run: " & Integer'Image (Actual_Steps));
+         
          Put_Line ("Hardware clock cycles consumed: " & Unsigned_64'Image (Total_Cycles));
          Put_Line ("Approximate time consumed: " & SI_Seconds'Image & " s");
          return;

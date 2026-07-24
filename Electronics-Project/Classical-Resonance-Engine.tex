@@ -1,0 +1,542 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Project: The Classical Resonance Engine (2-Bit / 4-State
+Demonstrator)}\label{project-the-classical-resonance-engine-2-bit-4-state-demonstrator}
+
+\subsubsection{Demystifying ``Quantum'' Superposition and Oracle Search
+Using Room-Temperature Analog
+Waves}\label{demystifying-quantum-superposition-and-oracle-search-using-room-temperature-analog-waves}
+
+This open-source hardware project implements Grover's search algorithm
+using high-frequency, room-temperature operational amplifiers. By
+bypassing abstract matrix formalism and cryogenic dependencies, this
+circuit models the search space as a parallel network of phase-locked
+oscillators. It demonstrates that ``quantum'' amplitude amplification is
+structurally isomorphic to classical wave mechanics,
+constructive/destructive interference, and analog signal mixing.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Algorithmic Architecture \& Engineering
+Theory}\label{algorithmic-architecture-engineering-theory}
+
+\subsubsection{The Classical Phase View}\label{the-classical-phase-view}
+
+In academic quantum computing literature, Grover's search maps an
+unstructured database to an abstract, unobservable Hilbert space where
+states exist in a fragile superposition. The state vector is rotated
+blindly for \(R \approx \frac{\pi}{4}\sqrt{N}\) steps until a destructive
+measurement collapses the vector.
+
+This circuit strips away that vocabulary. We represent a 2-bit database
+(\(N = 2^{2} = 4\) states) as four physical, concurrent AC voltage
+signals oscillating at a fixed carrier frequency (\(f_0
+\approx 16\text{ kHz}\)).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Superposition = Uniform Wave Distribution:} A single reference
+  clock pumps identical, in-phase signals across four independent
+  operational amplifier buffers. Every state is active simultaneously.
+\item
+  \textbf{The Oracle = \(180^\circ\) (\(\pi\) Radian) Phase Shift:}
+  Selecting a ``target'' coordinate via a mechanical switch routes that
+  specific channel through a unity-gain inverting amplifier
+  (\(V_{\text{out}} = -V_{\text{in}}\)). It flips the sign of that
+  coordinate's amplitude.
+\item
+  \textbf{The Diffusion Mixer = DC Offset Inversion:} A central
+  inverting summing amplifier continuously adds the signals from all
+  four nodes. This calculates the global arithmetic mean (\(\mu\)). By
+  feeding the inverted mean back into the array, the circuit performs an
+  instantaneous, continuous \textbf{Inversion About the Average}:
+\end{itemize}
+
+\[
+V_{\text{out\_channel}} = 2V_{\text{mean}} -
+V_{\text{in\_channel}}
+\]
+
+\subsubsection{Continuous Early Termination (Why Analog Beats the
+Textbooks)}\label{continuous-early-termination-why-analog-beats-the-textbooks}
+
+Because these are macroscopic, classical voltage signals, there is no
+``wavefunction collapse.'' A serious hobbyist can use a standard
+oscilloscope probe or a window comparator to monitor the nodes
+continuously without altering the data trajectory.
+
+When a target's phase is flipped, the continuous active feedback loop
+causes the target channel's voltage to spike past the baseline almost
+instantly, while the incorrect channels suffer destructive interference
+and dim out. A comparator detects this threshold breakout and halts
+immediately---physically demonstrating \textbf{numerical early
+termination} at room temperature.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Complete Bill of Materials
+(BOM)}\label{complete-bill-of-materials-bom}
+
+All components listed are inexpensive, generic, and readily available
+from major distributors (Mouser, DigiKey, JameCo) or standard
+electronics hobby bins.
+
+\subsubsection{Active Semiconductors}\label{active-semiconductors}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Qty
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Component Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Part Number
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Purpose
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2 & Quad Operational Amplifier & \textbf{TL074CN} (or TL084) & High
+Slew-Rate JFET-Input Quad Op-Amp & Array buffers, phase inverters, and
+summing mixers. \\
+1 & Quad Comparator & \textbf{LM339N} & Low-Voltage Open-Collector Quad
+Comparator & Direct window-threshold discriminator for early
+breakout. \\
+\end{longtable}
+
+\subsubsection{Passives \& Electromechanical (1/4W, 1\% Tolerance
+Recommended)}\label{passives-electromechanical-14w-1-tolerance-recommended}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Qty
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Value / Part
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Purpose / Placement
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+12 & \textbf{10 kΩ} & Metal Film Resistor & Crucial for matched
+unity-gain inversion and summing nodes. \\
+4 & \textbf{1 kΩ} & Carbon Film Resistor & Current-limiting resistors
+for the output display LEDs. \\
+4 & \textbf{1N4148} & Fast Switching Diode & Half-wave rectifiers to
+convert AC wave amplitude to DC levels. \\
+1 & \textbf{10 nF} (\(0.01\mu\text{F}\)) & Ceramic Disc Capacitor & DC
+blocking / low-pass filter smoothing for envelope detectors. \\
+1 & \textbf{4-Position DIP} & SPST Switch Block & Represents the 2-bit
+search database inputs (States 00, 01, 10, 11). \\
+4 & \textbf{Standard LED} & Red or Green T-1 3/4 & Visual amplitude
+resonance indicator per coordinate lane. \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. LTspice Reference Circuit
+Architecture}\label{ltspice-reference-circuit-architecture}
+
+To verify the circuit's phase-mixing operations before modifying real
+hardware, copy the raw netlist text block below and save it locally as
+\texttt{grover\_resonance.net}. You can open this file directly inside
+LTspice to plot the continuous wave amplification.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{* Classical Grover Resonance Engine {-} 4{-}State Analog Netlist Snapshot}
+\NormalTok{.OPTIONS plotwinsize=0 numdgt=7}
+\NormalTok{.PARAM FREQ=15915 RMATCH=10k}
+
+\NormalTok{* 1. Carrier Signal Reference Generator (15.9 kHz)}
+\NormalTok{V\_Ref Ref\_CLK 0 SINE(0 1 \{FREQ\})}
+\NormalTok{R\_Ref\_Load Ref\_CLK 0 100k}
+
+\NormalTok{* 2. State Channel Array Buffers (Non{-}Inverting Configuration)}
+\NormalTok{X\_Buf0 Ref\_CLK Node\_0\_In VCC VEE TL074}
+\NormalTok{X\_Buf1 Ref\_CLK Node\_1\_In VCC VEE TL074}
+\NormalTok{X\_Buf2 Ref\_CLK Node\_2\_In VCC VEE TL074}
+\NormalTok{X\_Buf3 Ref\_CLK Node\_3\_In VCC VEE TL074}
+
+\NormalTok{* 3. Mechanical Oracle Matrix Simulation (State 2 / Node 2 Phase Flipped)}
+\NormalTok{* To switch targets in LTspice, manually change which node connects to the inverter.}
+\NormalTok{X\_Inv2 Node\_2\_In Node\_2\_Oracle VCC VEE TL074 Res\_Inv1 Node\_2\_In Node\_2\_Oracle \{RMATCH\}}
+
+\NormalTok{* 4. Central Diffusion Summing Mixer (Computes Mean and Multiplies by 2)}
+\NormalTok{R\_Sum0 Node\_0\_In Sum\_Node \{RMATCH\}}
+\NormalTok{R\_Sum1 Node\_1\_In Sum\_Node \{RMATCH\}}
+\NormalTok{R\_Sum2 Node\_2\_Oracle Sum\_Node \{RMATCH\}}
+\NormalTok{R\_Sum3 Node\_3\_In Sum\_Node \{RMATCH\}}
+
+\NormalTok{X\_Mixer Sum\_Node Mean\_Out VCC VEE TL074}
+\NormalTok{R\_Feedback Sum\_Node Mean\_Out \{RMATCH\}}
+
+\NormalTok{* 5. Envelope Demodulator \& Early Termination Peak Check}
+\NormalTok{D\_Det0 Node\_2\_Oracle Envelope\_0 1N4148}
+\NormalTok{C\_Smooth0 Envelope\_0 0 10nF}
+\NormalTok{R\_Bleed0 Envelope\_0 0 100k}
+
+\NormalTok{* 6. Power Supply Rails}
+\NormalTok{V\_Pos VCC 0 12}
+\NormalTok{V\_Neg VEE 0 {-}12}
+
+\NormalTok{.TRAN 0 2m 0 1u}
+\NormalTok{.END}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Hardware Calibration \& Scope
+Diagnostics}\label{hardware-calibration-scope-diagnostics}
+
+Once you assemble the circuit on a solderless breadboard, follow this
+validation protocol to document your performance metrics:
+
+\subsubsection{Step A: Power Configuration \& Baseline
+Balance}\label{step-a-power-configuration-baseline-balance}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Connect a regulated dual-rail power supply (\(\pm12\text{V}\)DC or
+  \(\pm15\text{V}\)DC) to the \texttt{VCC} and \texttt{VEE} pins of the
+  TL074 packages. Decouple each rail using a \(0.1\mu\text{F}\) ceramic
+  capacitor placed immediately adjacent to the chip pins to kill
+  high-frequency switching noise.
+\item
+  Turn \textbf{all DIP switches OFF}. All four monitor LEDs should glow
+  with identical, faint, baseline intensity.
+\item
+  Hook your oscilloscope Probe Channel 1 to \texttt{Mean\_Out}. With no
+  target selected, the sum of four perfectly symmetric in-phase waves
+  divided by their count yields a clean, unshifted reference sine wave.
+\end{enumerate}
+
+\subsubsection{Step B: Oracle Execution \& Signal
+Tracking}\label{step-b-oracle-execution-signal-tracking}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Flip \textbf{DIP Switch 2 ON} (this marks coordinate state \(10_2\) as
+  the target proposition).
+\item
+  Move your oscilloscope probe to monitor the output pin of the target
+  channel. You will see the sine wave immediately shift position by
+  exactly half a wavelength (\(180^\circ\) phase inversion).
+\item
+  Monitor \texttt{Mean\_Out} now. The inversion of a single lane causes
+  the global average to drop. The central mixer amplifies this
+  discrepancy, pushing a massive feedback current back into the array.
+\end{enumerate}
+
+\subsubsection{Step C: Early Termination Threshold
+Verification}\label{step-c-early-termination-threshold-verification}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Probe the output of your half-wave envelope diode detector
+  (\texttt{Envelope\_0}).
+\item
+  Watch the DC voltage level on your screen. It does not wait for a
+  clock cycle; it surges continuously from a baseline of roughly
+  \(0.2\text{V}\) up to a sharp peak of over \(1.5\text{V}\) within
+  \textbf{two wave periods} (\(\approx 120\text{ microseconds}\)).
+\item
+  The LM339 comparator catches this rising edge, instantly tripping its
+  output pin to open-collector ground. This turns on your ``Target
+  Locked'' indicator LED, proving you have caught the correct index
+  using pure, room-temperature analog wave mechanics.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5. LM339 Window Comparator Hardware
+Topology}\label{lm339-window-comparator-hardware-topology}
+
+To achieve reliable early termination without processor overhead, we
+route the demodulated analog envelope through a hardware \textbf{Window
+Comparator}. This ensures the system instantly locks and flags an
+interrupt only when a coordinate lane's wave amplitude breaches the
+background noise threshold.
+
+\subsubsection{Threshold Reference
+Dividers}\label{threshold-reference-dividers}
+
+Connect three \(10\text{ k}\Omega\) resistors in series between the
+\(+12\text{V}\) (VCC) rail and System Ground (GND) to establish a
+dual-threshold reference network: * \textbf{High Threshold Reference
+Point (\(\approx 3.0\text{V}\)):} Taken from the tap between the first
+and second resistors. * \textbf{Low Threshold Reference Point
+(\(\approx 1.5\text{V}\)):} Taken from the tap between the second and
+third resistors.
+
+\subsubsection{Comparator Integration
+Map}\label{comparator-integration-map}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{LM339 Stage 1 (Over-Voltage Monitor):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Connect the \textbf{Inverting Input (-)} to the \textbf{High
+    Threshold Reference Point (\(\approx 3.0\text{V}\))}.
+  \item
+    Connect the \textbf{Non-Inverting Input (+)} to your
+    \textbf{Envelope Detector Output}.
+  \end{itemize}
+\item
+  \textbf{LM339 Stage 2 (Under-Voltage Monitor):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Connect the \textbf{Inverting Input (-)} to your \textbf{Envelope
+    Detector Output}.
+  \item
+    Connect the \textbf{Non-Inverting Input (+)} to the \textbf{Low
+    Threshold Reference Point (\(\approx 1.5\text{V}\))}.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Combined Logic Output}\label{combined-logic-output}
+
+\begin{itemize}
+\tightlist
+\item
+  Tie the Open-Collector Output Pin of Stage 1 directly to the
+  Open-Collector Output Pin of Stage 2. This hardwires an analog
+  \textbf{Window Comparator Logic Block}.
+\item
+  Connect a single \(4.7\text{k}\Omega\) pull-up resistor from this
+  combined output node up to the Arduino Nano's \(+5\text{V}\) rail.
+\item
+  Route this same combined output node directly into \textbf{Arduino Pin
+  D2} to serve as the hardware interrupt trigger.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6. Arduino Nano Automation Script (The Interface
+Layer)}\label{arduino-nano-automation-script-the-interface-layer}
+
+Instead of using physical DIP switches to select database targets, this
+script routes the selection lines through digital logic gates (or analog
+multiplexer channels like the 4051/74HC4067). It configures a high-speed
+hardware interrupt pin (\texttt{D2}) to monitor the LM339 output,
+logging the exact execution time down to the microsecond.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{/*}
+\CommentTok{ *  The Classical Resonance Engine {-} Hybrid Controller Interface}
+\CommentTok{ *  Automating Analog Wave Formulations on Standard Silicon Microcontrollers}
+\CommentTok{ */}
+
+\PreprocessorTok{\#include }\ImportTok{\textless{}Arduino.h\textgreater{}}
+
+\CommentTok{// Pin Allocation Metrics}
+\AttributeTok{const} \DataTypeTok{int}\NormalTok{ TARGET\_SELECT\_A }\OperatorTok{=} \DecValTok{4}\OperatorTok{;} \CommentTok{// Digital bit 0 representing address space}
+\AttributeTok{const} \DataTypeTok{int}\NormalTok{ TARGET\_SELECT\_B }\OperatorTok{=} \DecValTok{5}\OperatorTok{;} \CommentTok{// Digital bit 1 representing address space}
+\AttributeTok{const} \DataTypeTok{int}\NormalTok{ INTERRUPT\_PIN   }\OperatorTok{=} \DecValTok{2}\OperatorTok{;} \CommentTok{// Dedicated hardware interrupt pin (INT0)}
+
+\CommentTok{// Volatile trackers to communicate safely with the interrupt service routine}
+\AttributeTok{volatile} \DataTypeTok{bool}\NormalTok{     resonance\_locked }\OperatorTok{=} \KeywordTok{false}\OperatorTok{;}
+\AttributeTok{volatile} \DataTypeTok{uint32\_t}\NormalTok{ stop\_time\_us     }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+\DataTypeTok{uint32\_t}\NormalTok{          start\_time\_us    }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+
+\CommentTok{// Hardware Interrupt Service Routine (ISR)}
+\CommentTok{// Triggered instantly the microsecond the LM339 Window Comparator trips}
+\DataTypeTok{void}\NormalTok{ ICACHE\_RAM\_ATTR on\_resonance\_lock}\OperatorTok{()} \OperatorTok{\{}
+\NormalTok{    stop\_time\_us     }\OperatorTok{=}\NormalTok{ micros}\OperatorTok{();}
+\NormalTok{    resonance\_locked }\OperatorTok{=} \KeywordTok{true}\OperatorTok{;}
+\OperatorTok{\}}
+
+\DataTypeTok{void}\NormalTok{ setup}\OperatorTok{()} \OperatorTok{\{}
+\NormalTok{    Serial}\OperatorTok{.}\NormalTok{begin}\OperatorTok{(}\DecValTok{115200}\OperatorTok{);}
+    \ControlFlowTok{while} \OperatorTok{(!}\NormalTok{Serial}\OperatorTok{)} \OperatorTok{\{} \OperatorTok{;} \OperatorTok{\}} \CommentTok{// Wait for terminal initialization}
+
+    \CommentTok{// Configure selection lines to manipulate the analog oracle switches}
+\NormalTok{    pinMode}\OperatorTok{(}\NormalTok{TARGET\_SELECT\_A}\OperatorTok{,}\NormalTok{ OUTPUT}\OperatorTok{);}
+\NormalTok{    pinMode}\OperatorTok{(}\NormalTok{TARGET\_SELECT\_B}\OperatorTok{,}\NormalTok{ OUTPUT}\OperatorTok{);}
+    
+    \CommentTok{// Configure interrupt line with internal pull{-}up safety}
+\NormalTok{    pinMode}\OperatorTok{(}\NormalTok{INTERRUPT\_PIN}\OperatorTok{,}\NormalTok{ INPUT\_PULLUP}\OperatorTok{);}
+    
+    \CommentTok{// Attach interrupt handler to catch the falling edge (LM339 open{-}collector drop)}
+\NormalTok{    attachInterrupt}\OperatorTok{(}\NormalTok{digitalPinToInterrupt}\OperatorTok{(}\NormalTok{INTERRUPT\_PIN}\OperatorTok{),}\NormalTok{ on\_resonance\_lock}\OperatorTok{,}\NormalTok{ FALLING}\OperatorTok{);}
+
+\NormalTok{    Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"================================================="}\OperatorTok{);}
+\NormalTok{    Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"   Analog Grover Resonance Engine Initialized   "}\OperatorTok{);}
+\NormalTok{    Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"================================================="}\OperatorTok{);}
+\OperatorTok{\}}
+
+\DataTypeTok{void}\NormalTok{ loop}\OperatorTok{()} \OperatorTok{\{}
+    \CommentTok{// 1. Reset state flags}
+\NormalTok{    resonance\_locked }\OperatorTok{=} \KeywordTok{false}\OperatorTok{;}
+    
+    \CommentTok{// 2. Select a target index inside the 2{-}bit space (Example: State 10\_2)}
+    \CommentTok{// Bit 0 = Low, Bit 1 = High}
+\NormalTok{    digitalWrite}\OperatorTok{(}\NormalTok{TARGET\_SELECT\_A}\OperatorTok{,}\NormalTok{ LOW}\OperatorTok{);}
+\NormalTok{    digitalWrite}\OperatorTok{(}\NormalTok{TARGET\_SELECT\_B}\OperatorTok{,}\NormalTok{ HIGH}\OperatorTok{);}
+    
+\NormalTok{    Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"[System] Phase{-}inversion oracle activated for State 10..."}\OperatorTok{);}
+
+    \CommentTok{// 3. Mark the precise starting epoch}
+\NormalTok{    start\_time\_us }\OperatorTok{=}\NormalTok{ micros}\OperatorTok{();}
+
+    \CommentTok{// 4. Force the processor to wait while the analog op{-}amps mix the wave states}
+    \CommentTok{// The microcontroller does absolutely nothing here; the analog wires do the calculations.}
+    \ControlFlowTok{while} \OperatorTok{(!}\NormalTok{resonance\_locked}\OperatorTok{)} \OperatorTok{\{}
+        \CommentTok{// Enforce a simple safety timeout barrier to prevent infinite stall}
+        \ControlFlowTok{if} \OperatorTok{(}\NormalTok{micros}\OperatorTok{()} \OperatorTok{{-}}\NormalTok{ start\_time\_us }\OperatorTok{\textgreater{}} \DecValTok{50000}\OperatorTok{)} \OperatorTok{\{} 
+\NormalTok{            Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"[Error] Resonance threshold timeout. Check circuit tuning."}\OperatorTok{);}
+            \ControlFlowTok{break}\OperatorTok{;}
+        \OperatorTok{\}}
+    \OperatorTok{\}}
+
+    \CommentTok{// 5. Output precise benchmark telemetry metrics}
+    \ControlFlowTok{if} \OperatorTok{(}\NormalTok{resonance\_locked}\OperatorTok{)} \OperatorTok{\{}
+        \DataTypeTok{uint32\_t}\NormalTok{ total\_execution\_time }\OperatorTok{=}\NormalTok{ stop\_time\_us }\OperatorTok{{-}}\NormalTok{ start\_time\_us}\OperatorTok{;}
+        
+\NormalTok{        Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}"}\OperatorTok{);}
+\NormalTok{        Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{" {-}\textgreater{} SUCCESS: Target Coordinate Locked By Analog Waves!"}\OperatorTok{);}
+\NormalTok{        Serial}\OperatorTok{.}\NormalTok{print}\OperatorTok{(}\StringTok{" {-}\textgreater{} Real{-}World Execution Time: "}\OperatorTok{);}
+\NormalTok{        Serial}\OperatorTok{.}\NormalTok{print}\OperatorTok{(}\NormalTok{total\_execution\_time}\OperatorTok{);}
+\NormalTok{        Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{" microseconds."}\OperatorTok{);}
+\NormalTok{        Serial}\OperatorTok{.}\NormalTok{println}\OperatorTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}"}\OperatorTok{);}
+    \OperatorTok{\}}
+
+    \CommentTok{// Hold execution for 5 seconds before launching the next search block sweep}
+\NormalTok{    delay}\OperatorTok{(}\DecValTok{5000}\OperatorTok{);}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

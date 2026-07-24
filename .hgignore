@@ -1,5 +1,5 @@
 .*~$
 .*\.orig$
 .*\.(o|ali)$
-^Ada/demo_entropy$
-^Ada/search_driver$
+^Ada-Zen5-IntegerMath/demo_entropy$
+^Ada-Zen5-IntegerMath/search_driver$
