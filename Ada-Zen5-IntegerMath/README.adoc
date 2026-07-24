@@ -9,11 +9,11 @@ include lwt as sources along with my program.
 The arithmetic is fixed point in integers (rather than in Ada fixed
 point types). If you need more stack space, try
 
-[.source,shell]
-++++
+[source,shell]
+----
 ulimit -s unlimited
 export GNAT_PARALLEL_STACK_SIZE=8388608
-++++
+----
 
 Here are results from an example run on my mini-PC:
 
