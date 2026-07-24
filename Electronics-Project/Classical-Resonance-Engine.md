@@ -8,15 +8,15 @@ This open-source hardware project implements Grover’s search algorithm using h
 ## 1. Algorithmic Architecture & Engineering Theory
 
 ### The Classical Phase View
-In academic quantum computing literature, Grover's search maps an unstructured database to an abstract, unobservable Hilbert space where states exist in a fragile superposition. The state vector is rotated blindly for \(R \approx \frac{\pi}{4}\sqrt{N}\) steps until a destructive measurement collapses the vector.
+In academic quantum computing literature, Grover's search maps an unstructured database to an abstract, unobservable Hilbert space where states exist in a fragile superposition. The state vector is rotated blindly for $R \approx \frac{\pi}{4}\sqrt{N}$ steps until a destructive measurement collapses the vector.
 
-This circuit strips away that vocabulary. We represent a 2-bit database (\(N = 2^2 = 4\) states) as four physical, concurrent AC voltage signals oscillating at a fixed carrier frequency (\(f_0 \approx 16\text{ kHz}\)). 
+This circuit strips away that vocabulary. We represent a 2-bit database ($N = 2^2 = 4$ states) as four physical, concurrent AC voltage signals oscillating at a fixed carrier frequency ($f_0 \approx 16\text{ kHz}$). 
 
 *   **Superposition = Uniform Wave Distribution:** A single reference clock pumps identical, in-phase signals across four independent operational amplifier buffers. Every state is active simultaneously.
-*   **The Oracle = \(180^\circ\) (\(\pi\) Radian) Phase Shift:** Selecting a "target" coordinate via a mechanical switch routes that specific channel through a unity-gain inverting amplifier (\(V_{\text{out}} = -V_{\text{in}}\)). It flips the sign of that coordinate's amplitude.
-*   **The Diffusion Mixer = DC Offset Inversion:** A central inverting summing amplifier continuously adds the signals from all four nodes. This calculates the global arithmetic mean (\(\mu\)). By feeding the inverted mean back into the array, the circuit performs an instantaneous, continuous **Inversion About the Average**:
+*   **The Oracle = $180^\circ$ ($\pi$ Radian) Phase Shift:** Selecting a "target" coordinate via a mechanical switch routes that specific channel through a unity-gain inverting amplifier ($V_{\text{out}} = -V_{\text{in}}$). It flips the sign of that coordinate's amplitude.
+*   **The Diffusion Mixer = DC Offset Inversion:** A central inverting summing amplifier continuously adds the signals from all four nodes. This calculates the global arithmetic mean ($\mu$). By feeding the inverted mean back into the array, the circuit performs an instantaneous, continuous **Inversion About the Average**:
 
-\[V_{\text{out\_channel}} = 2V_{\text{mean}} - V_{\text{in\_channel}}\]
+$$V_{\text{out\_channel}} = 2V_{\text{mean}} - V_{\text{in\_channel}}$$
 
 ### Continuous Early Termination (Why Analog Beats the Textbooks)
 Because these are macroscopic, classical voltage signals, there is no "wavefunction collapse." A serious hobbyist can use a standard oscilloscope probe or a window comparator to monitor the nodes continuously without altering the data trajectory. 
@@ -43,7 +43,7 @@ All components listed are inexpensive, generic, and readily available from major
 | 12 | **10 kΩ** | Metal Film Resistor | Crucial for matched unity-gain inversion and summing nodes. |
 | 4 | **1 kΩ** | Carbon Film Resistor | Current-limiting resistors for the output display LEDs. |
 | 4 | **1N4148** | Fast Switching Diode | Half-wave rectifiers to convert AC wave amplitude to DC levels. |
-| 1 | **10 nF** (\(0.01\mu\text{F}\)) | Ceramic Disc Capacitor | DC blocking / low-pass filter smoothing for envelope detectors. |
+| 1 | **10 nF** ($0.01\mu\text{F}$) | Ceramic Disc Capacitor | DC blocking / low-pass filter smoothing for envelope detectors. |
 | 1 | **4-Position DIP** | SPST Switch Block | Represents the 2-bit search database inputs (States 00, 01, 10, 11). |
 | 4 | **Standard LED** | Red or Green T-1 3/4 | Visual amplitude resonance indicator per coordinate lane. |
 

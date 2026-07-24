@@ -46,15 +46,6 @@ demo_entropy: $(DEMO_ENTROPY_SOURCES)
 	$(GNATMAKE) $(@) -cargs -mno-rdseed -gnata -gnato1
 clean:: ; -rm -f demo_entropy
 
-
-#example_runs/test_grover.zen5: $(TEST_GROVER_SOURCES)
-#	mkdir -p $(@D)
-#	$(MAKE) clean
-#	( $(MAKE) test_grover 2>&1 ) 2>&1 > $(@).tmp
-#	( time ./test_grover 2>&1 >> $(@).tmp ) 2> $(@).time.tmp
-#	cat $(@).tmp $(@).time.tmp > $(@)
-#	rm $(@).tmp $(@).time.tmp
-
 clean::
 	-rm -f *.{o,ali}
 	-rm -f *.tmp */*.tmp

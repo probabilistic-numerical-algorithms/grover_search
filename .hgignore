@@ -3,3 +3,4 @@
 .*\.(o|ali)$
 ^Ada-Zen5-IntegerMath/demo_entropy$
 ^Ada-Zen5-IntegerMath/search_driver$
+^Electronics-Project/.*\.(aux|log)$

@@ -124,13 +124,13 @@ Theory}\label{algorithmic-architecture-engineering-theory}
 In academic quantum computing literature, Grover's search maps an
 unstructured database to an abstract, unobservable Hilbert space where
 states exist in a fragile superposition. The state vector is rotated
-blindly for \(R \approx \frac{\pi}{4}\sqrt{N}\) steps until a destructive
-measurement collapses the vector.
+blindly for \(R \approx \frac{\pi}{4}\sqrt{N}\) steps until a
+destructive measurement collapses the vector.
 
 This circuit strips away that vocabulary. We represent a 2-bit database
-(\(N = 2^{2} = 4\) states) as four physical, concurrent AC voltage
-signals oscillating at a fixed carrier frequency (\(f_0
-\approx 16\text{ kHz}\)).
+(\(N = 2^2 = 4\) states) as four physical, concurrent AC voltage signals
+oscillating at a fixed carrier frequency
+(\(f_0 \approx 16\text{ kHz}\)).
 
 \begin{itemize}
 \tightlist
@@ -152,10 +152,7 @@ signals oscillating at a fixed carrier frequency (\(f_0
   instantaneous, continuous \textbf{Inversion About the Average}:
 \end{itemize}
 
-\[
-V_{\text{out\_channel}} = 2V_{\text{mean}} -
-V_{\text{in\_channel}}
-\]
+\[V_{\text{out\_channel}} = 2V_{\text{mean}} - V_{\text{in\_channel}}\]
 
 \subsubsection{Continuous Early Termination (Why Analog Beats the
 Textbooks)}\label{continuous-early-termination-why-analog-beats-the-textbooks}
