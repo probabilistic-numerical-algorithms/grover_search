@@ -30,15 +30,16 @@ be widely known already, had the algorithm been analyzed by numerical
 analysts who had never been exposed to quantum theory.
 
 First there is a point that is obvious to any truly practical
-programmer, which is that, for a problem like searching an array, √N
-is bounded by the size of a pointer. Thus the time complexity is
-_probabilistically constant_. Nevertheless, according to “tooth fairy”
-theory you have to run the computer for the full (π/4)√N iterations.
-Otherwise the “tooth fairies” cannot complete their spell. This is
-known as the _Principle of Niels Bohr was a Fruitcake Wrapped in a
-Nutroll_.
+programmer, which is that, for a problem like searching an array, the
+size of the amplitudes array is bounded by the size of a pointer, and
+thus is on the order of a _constant_. Nevertheless, according to
+“tooth fairy” theory you have to run the computation for a full number
+of iterations. Otherwise the “tooth fairies” cannot complete their
+spell. This is known as the _Principle of Niels Bohr was a Fruitcake
+Wrapped in a Nutroll_. A consequence of this is Grover’s algorithm is
+slow as molasses, and it is commonly thought this is an impasse.
 
-_In fact Grover’s algorithm is far, far faster._ You can stop the
+_In fact Grover’s algorithm is lightning fast._ You can stop the
 algorithm whenever there is an indication it has reached a conclusion.
 This is true whether the hardware is analog or digital. Our
 implementations look for such indications.
