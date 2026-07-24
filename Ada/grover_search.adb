@@ -54,6 +54,13 @@ package body grover_search is
    package real_entropy is new entropy (real);
    use real_entropy;
 
+   function "mod" (left, right : real)
+   return real is
+   begin
+      -- Standard floored modulo logic matching integer "mod".
+      return left - (right * real'floor (left / right));
+   end "mod";
+
    procedure initialize (amplitudes : in out amplitude_array) is
      n          : constant real := real (amplitudes'length);
      init_value : constant real := 1.0 / sqrt (n);
@@ -209,35 +216,24 @@ package body grover_search is
        return retval;
      end bits_to_natural;
 
-     function sample_quickly
+     function sample
      return natural
-     with post => (sample_quickly'result < n * n) is
+     with post => (sample'result < n * n) is
+       i       : constant real := uniform_real;
+       j       : constant real := i mod 1.0
+       ampl_sq : real;
+       phase   : boolean;
      begin
        parallel for i in amplitudes'range loop
-         bits(i) := (0.5 <= amplitudes(i) ** 2);
+         phase := (0.0 <= amplitudes(i));
+         ampl_sq := amplitudes(i) ** 2;
+         bits(i) :=
+           (((offset - 0.5 <= ampl_sq and ampl_sq < offset + 0.5)
+             or (0.5 + offset <= ampl_sq))
+            = phase);
        end loop;
        return bits_to_natural;
-     end sample_quickly;
-
-     function sample_probabilistically
-     return natural
-     with post => (sample_probabilistically'result < n * n) is
-     begin
-       parallel for i in amplitudes'range loop
-         bits(i) := (uniform_real <= amplitudes(i) ** 2);
-       end loop;
-       return bits_to_natural;
-     end sample_probabilistically;
-
-     procedure apply_predicatexxxxxxx is
-       i : constant natural := sample_quickly;
-     begin
-       if predicate (i) then
-         parallel for i in amplitudes'range loop
-           amplitudes (i) := -amplitudes (i);
-         end loop;
-       end if;
-     end apply_predicatexxxxxxx;
+     end sample;
 
     procedure apply_predicate is
     begin
@@ -263,40 +259,55 @@ package body grover_search is
        -- FIXME: THIS SHOULD TEST FOR A MATCH IN APPLY PREDICATE.
        --
        -- Run the Grover iterations.
-       for step in 1 .. iterations loop
-         apply_predicate; ----------------------------------------------------------------- (amplitudes);
-         apply_diffusion (amplitudes);
-       end loop;
+--       for step in 1 .. iterations loop
+--         apply_predicate;
+--         apply_diffusion (amplitudes);
+--       end loop;
+       declare
+         step : integer range 1 .. iterations + 1 := 1;
+       begin
+         result_idx := sample;
+         found := predicate (result_idx);
+         while not found and step /= iterations + 1 loop
+           apply_diffusion (amplitudes);
+           step := @ + 1;
+         end loop;
+       end;
 
        -- Measure probabilistically.
        r_val := uniform_real;
 
        sum_sq := sum_sq_recursive (amplitudes);
 
-       declare
-          cumulative : real := 0.0;
-          prob : real;
-          i : natural := amplitudes'first;
-          done : boolean := false;
-       begin
-          measured_idx := amplitudes'first;
-          while i <= amplitudes'last and not done loop
-             prob := (amplitudes (i) * amplitudes (i)) / sum_sq;
-             cumulative := @ + prob;
-             measured_idx := i;
-             if r_val <= cumulative then
-                done := true;
-             else
-                i := i + 1;
-             end if;
-          end loop;
+       if not found then
+         declare
+            cumulative : real := 0.0;
+            prob : real;
+            i : natural := amplitudes'first;
+            done : boolean := false;
+         begin
+            measured_idx := amplitudes'first;
+            while i <= amplitudes'last and not done loop
+               prob := (amplitudes (i) * amplitudes (i)) / sum_sq;
+               cumulative := @ + prob;
+               measured_idx := i;
+               if r_val <= cumulative then
+                  done := true;
+               else
+                  i := i + 1;
+               end if;
+            end loop;
 
-          -- Check if the measured index satisfies the predicate.
-          if predicate (measured_idx) then
-             found := true;
-             result_idx := measured_idx;
-          end if;
-       end;
+--            normalize;
+--            result_idx := sample;
+
+            -- Check if the measured index satisfies the predicate.
+            if predicate (measured_idx) then
+               found := true;
+               result_idx := measured_idx;
+            end if;
+         end;
+       end if;
 
        -- If measurement fails, retry with perturbation.
        attempts := @ + 1;

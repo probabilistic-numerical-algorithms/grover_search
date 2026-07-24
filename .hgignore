@@ -1,6 +1,5 @@
 .*~$
 .*\.orig$
 .*\.(o|ali)$
-^Ada/test_grover$
-^Ada/test_grover_2$
 ^Ada/demo_entropy$
+^Ada/search_driver$
