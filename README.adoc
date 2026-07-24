@@ -23,10 +23,11 @@ was amiss. Quantum theory is a cause of cerebral paralysis and should
 be banned by university faculties.
 
 Let me finish with something you likely will not find in the
-literature. The eggheads will tell you Grover’s algorithm is
-probabilistically order √N in time complexity. However, suppose you
-are using the algorithm to search for an element of an array in
-memory. The address of the element can be held in a processor
+literature, because the literature was not written by and for
+practical people like you and me. The eggheads will tell you Grover’s
+algorithm is probabilistically order √N in time complexity. However,
+suppose you are using the algorithm to search for an element of an
+array in memory. The address of the element can be held in a processor
 register. A processor register has a fixed size that forms an upper
 bound on √N. Therefore, for this problem, Grover’s algorithm is
 probabilistically a constant time search!
