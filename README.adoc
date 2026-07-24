@@ -1,36 +1,47 @@
 = Grover’s search algorithm
 
-This is Lov Grover’s famous search algorithm that runs in
-approximately (π/4)√N time. To get that speed requires parallel
-hardware.
+This is Lov Grover’s famous search algorithm that, according to
+theory, runs in approximately (π/4)√N time.
 
 Grover designed the algorithm for hybrid computers made of
 superconducting components. There is a theory that such hardware
-attracts invisible tooth fairies who hold hands and make the algorithm
-function. Actually the mathematics is the same no matter how you
-construct the hardware. You could make it in silicon from linear CMOS
-or operational amplifiers. However, it makes a lot more sense to use a
-digital computer.
+attracts “invisible tooth fairies” who form a chain by holding hands,
+to make the algorithm function. Actually the mathematics is the same
+no matter how you construct the hardware. You could make it in silicon
+from linear CMOS or operational amplifiers.
 
-The unusual speed of the algorithm comes from it being a parallel
-numerical algorithm that does what interconnected resonant analog
-circuits would do.
+_Indeed, here you will find an electronics project for high frequency
+op amps._
 
-There is no such thing as an entangled tooth fairy. Quantum theory is
-nonsense. When it was taught to me in the 1980s with explicit orders
-not to think, and just do the calculations, that was a sign something
-was amiss. Quantum theory is a cause of cerebral paralysis and should
-be banned by university faculties.
+The secret of the algorithm is not “tooth fairies” but phase-locked
+oscillators.
 
-Let me finish with something you likely will not find in the
-literature, because the literature was not written by and for
-practical people like you and me. The eggheads will tell you Grover’s
-algorithm is probabilistically order √N in time complexity. However,
-suppose you are using the algorithm to search for an element of an
-array in memory. The address of the element can be held in a processor
-register. A processor register has a fixed size that forms an upper
-bound on √N. Therefore, for this problem, Grover’s algorithm is
-probabilistically a constant time search!
+However, it makes a lot more sense to use a digital computer.
+
+There is no such thing as a “tooth fairy.” Quantum theory is nonsense.
+When it was taught to me in the 1980s with explicit orders not to
+think, and just do the calculations, that was a sign something was
+amiss. Quantum theory is a cause of cerebral paralysis and should be
+banned by university faculties.
+
+But the literature is completely wrong about the speed of Grover’s
+algorithm. It is actually much, much faster than (π/4)√N. This would
+be widely known already, had the algorithm been analyzed by numerical
+analysts who had never been exposed to quantum theory.
+
+First there is a point that is obvious to any truly practical
+programmer, which is that, for a problem like searching an array, √N
+is bounded by the size of a pointer. Thus the time complexity is
+_probabilistically constant_. Nevertheless, according to “tooth fairy”
+theory you have to run the computer for the full (π/4)√N iterations.
+Otherwise the “tooth fairies” cannot complete their spell. This is
+known as the _Principle of Niels Bohr was a Fruitcake Wrapped in a
+Nutroll_.
+
+_In fact Grover’s algorithm is far, far faster._ You can stop the
+algorithm whenever there is an indication it has reached a conclusion.
+This is true whether the hardware is analog or digital. Our
+implementations look for such indications.
 
 IMPORTANT: I AM A DISABLED SENIOR CITIZEN. PLEASE DO NOT BOTHER ME.
 ALL OF THIS STUFF IS DONATED TO THE PUBLIC DOMAIN FOR OTHERS TO DEAL

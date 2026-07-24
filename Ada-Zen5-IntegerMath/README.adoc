@@ -1,0 +1,33 @@
+= Grover’s algorithm as an array search for AMD Zen 5
+
+This is an implementation specifically for AMD Zen 5 architecture. On
+Linux as of 24 July 2026, you need the amdgpu kernel module, the
+experimental version of GCC that has support for Ada “parallel for”,
+and the Ada lightweight threads (lwt) library. What I do is simply
+include lwt as sources along with my program.
+
+The arithmetic is fixed point in integers (rather than in Ada fixed
+point types). If you need more stack space, try
+
+[source,shell]
+++++
+ulimit -s unlimited
+export GNAT_PARALLEL_STACK_SIZE=8388608
+++++
+
+Here are results from an example run on my mini-PC:
+
+Array size:  1048576
+Match locked at index:  3000
+Pass loop limit:  804
+Actual iterations run:  2
+Hardware clock cycles consumed:  6618600
+Approximate time consumed:  0.003315990 s
+
+The time in seconds includes the time spent computing hardware clock
+cycles.
+
+Notice that only two iterations were run. According to quantum theory,
+our tampering with the computation should have shattered the coherence
+of the “tooth fairies’” spell and given us a wrong answer. Instead we
+got a correct answer. Quantum theory is deranged.

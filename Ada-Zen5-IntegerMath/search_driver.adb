@@ -82,8 +82,8 @@ begin
       Actual_Steps     := 0;
 
       -- START TELEMETRY CLOCK
-      Start_Cycles := Read_CPU_Cycles;
       Start_Clock := Clock;
+      Start_Cycles := Read_CPU_Cycles;
 
       for Step in 1 .. Current_Loop loop
          Actual_Steps := Step;
