@@ -28,8 +28,8 @@ probabilistically order √N in time complexity. However, suppose you
 are using the algorithm to search for an element of an array in
 memory. The address of the element can be held in a processor
 register. A processor register has a fixed size that forms an upper
-bound on √N. Therefore Grover’s algorithm is probabilistically a
-constant time search!
+bound on √N. Therefore, for this problem, Grover’s algorithm is
+probabilistically a constant time search!
 
 IMPORTANT: I AM A DISABLED SENIOR CITIZEN. PLEASE DO NOT BOTHER ME.
 ALL OF THIS STUFF IS DONATED TO THE PUBLIC DOMAIN FOR OTHERS TO DEAL
