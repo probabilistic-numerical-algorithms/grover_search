@@ -54,43 +54,46 @@ All components listed are inexpensive, generic, and readily available from major
 To verify the circuit's phase-mixing operations before modifying real hardware, copy the raw netlist text block below and save it locally as `grover_resonance.net`. You can open this file directly inside LTspice to plot the continuous wave amplification.
 
 ```text
-* Classical Grover Resonance Engine - 4-State Analog Netlist Snapshot
-.OPTIONS plotwinsize=0 numdgt=7
+* Classical Grover Resonance Engine - Stabilized Rail-Clipped Netlist
+.OPTIONS plotwinsize=0 numdgt=7 nopage
 .PARAM FREQ=15915 RMATCH=10k
 
-* 1. Carrier Signal Reference Generator (15.9 kHz)
+* 1. NATIVE IDEAL DIODE MODEL 
+.MODEL D_IDEAL D(Is=1e-14 N=1)
+
+* 2. Force persistent data retention for plotting
+.SAVE V(Ref_CLK) V(Node_2_Oracle) V(Mean_Out) V(Envelope_0)
+
+* 3. Carrier Signal Reference Generator (1V Peak Reference)
 V_Ref Ref_CLK 0 SINE(0 1 {FREQ})
 R_Ref_Load Ref_CLK 0 100k
 
-* 2. State Channel Array Buffers (Non-Inverting Configuration)
-X_Buf0 Ref_CLK Node_0_In VCC VEE TL074
-X_Buf1 Ref_CLK Node_1_In VCC VEE TL074
-X_Buf2 Ref_CLK Node_2_In VCC VEE TL074
-X_Buf3 Ref_CLK Node_3_In VCC VEE TL074
+* 4. State Channel Array Buffers (Unity Gain Reference Buffers)
+E_Buf0 Node_0_In 0 Ref_CLK 0 1
+E_Buf1 Node_1_In 0 Ref_CLK 0 1
+E_Buf2 Node_2_In 0 Ref_CLK 0 1
+E_Buf3 Node_3_In 0 Ref_CLK 0 1
 
-* 3. Mechanical Oracle Matrix Simulation (State 2 / Node 2 Phase Flipped)
-* To switch targets in LTspice, manually change which node connects to the inverter.
-X_Inv2 Node_2_In Node_2_Oracle VCC VEE TL074 Res_Inv1 Node_2_In Node_2_Oracle {RMATCH}
+* 5. Mechanical Oracle Matrix (State 2 Phase Flipped - Clipped at +/-12V Rails)
+E_Inv2 Node_2_Op_Out 0 VALUE={LIMIT(100000 * (0 - V(Node_2_In)), -12, 12)}
+R_Inv_In   Node_2_In     Node_2_Oracle {RMATCH}
+R_Inv_Feed Node_2_Op_Out Node_2_Oracle {RMATCH}
 
-* 4. Central Diffusion Summing Mixer (Computes Mean and Multiplies by 2)
+* 6. Central Diffusion Summing Mixer (Computes Mean - Clipped at +/-12V Rails)
 R_Sum0 Node_0_In Sum_Node {RMATCH}
 R_Sum1 Node_1_In Sum_Node {RMATCH}
 R_Sum2 Node_2_Oracle Sum_Node {RMATCH}
 R_Sum3 Node_3_In Sum_Node {RMATCH}
 
-X_Mixer Sum_Node Mean_Out VCC VEE TL074
+E_Mixer Mean_Out 0 VALUE={LIMIT(100000 * (0 - V(Sum_Node)), -12, 12)}
 R_Feedback Sum_Node Mean_Out {RMATCH}
 
-* 5. Envelope Demodulator & Early Termination Peak Check
-D_Det0 Node_2_Oracle Envelope_0 1N4148
+* 7. Envelope Demodulator
+D_Det0 Node_2_Oracle Envelope_0 D_IDEAL
 C_Smooth0 Envelope_0 0 10nF
 R_Bleed0 Envelope_0 0 100k
 
-* 6. Power Supply Rails
-V_Pos VCC 0 12
-V_Neg VEE 0 -12
-
-.TRAN 0 2m 0 1u
+.TRAN 0 10m 0 1u
 .END
 ```
 
