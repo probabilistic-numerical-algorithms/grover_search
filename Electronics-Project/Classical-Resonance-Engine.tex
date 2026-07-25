@@ -258,43 +258,46 @@ LTspice to plot the continuous wave amplification.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{* Classical Grover Resonance Engine {-} 4{-}State Analog Netlist Snapshot}
-\NormalTok{.OPTIONS plotwinsize=0 numdgt=7}
+\NormalTok{* Classical Grover Resonance Engine {-} Stabilized Rail{-}Clipped Netlist}
+\NormalTok{.OPTIONS plotwinsize=0 numdgt=7 nopage}
 \NormalTok{.PARAM FREQ=15915 RMATCH=10k}
 
-\NormalTok{* 1. Carrier Signal Reference Generator (15.9 kHz)}
+\NormalTok{* 1. NATIVE IDEAL DIODE MODEL }
+\NormalTok{.MODEL D\_IDEAL D(Is=1e{-}14 N=1)}
+
+\NormalTok{* 2. Force persistent data retention for plotting}
+\NormalTok{.SAVE V(Ref\_CLK) V(Node\_2\_Oracle) V(Mean\_Out) V(Envelope\_0)}
+
+\NormalTok{* 3. Carrier Signal Reference Generator (1V Peak Reference)}
 \NormalTok{V\_Ref Ref\_CLK 0 SINE(0 1 \{FREQ\})}
 \NormalTok{R\_Ref\_Load Ref\_CLK 0 100k}
 
-\NormalTok{* 2. State Channel Array Buffers (Non{-}Inverting Configuration)}
-\NormalTok{X\_Buf0 Ref\_CLK Node\_0\_In VCC VEE TL074}
-\NormalTok{X\_Buf1 Ref\_CLK Node\_1\_In VCC VEE TL074}
-\NormalTok{X\_Buf2 Ref\_CLK Node\_2\_In VCC VEE TL074}
-\NormalTok{X\_Buf3 Ref\_CLK Node\_3\_In VCC VEE TL074}
+\NormalTok{* 4. State Channel Array Buffers (Unity Gain Reference Buffers)}
+\NormalTok{E\_Buf0 Node\_0\_In 0 Ref\_CLK 0 1}
+\NormalTok{E\_Buf1 Node\_1\_In 0 Ref\_CLK 0 1}
+\NormalTok{E\_Buf2 Node\_2\_In 0 Ref\_CLK 0 1}
+\NormalTok{E\_Buf3 Node\_3\_In 0 Ref\_CLK 0 1}
 
-\NormalTok{* 3. Mechanical Oracle Matrix Simulation (State 2 / Node 2 Phase Flipped)}
-\NormalTok{* To switch targets in LTspice, manually change which node connects to the inverter.}
-\NormalTok{X\_Inv2 Node\_2\_In Node\_2\_Oracle VCC VEE TL074 Res\_Inv1 Node\_2\_In Node\_2\_Oracle \{RMATCH\}}
+\NormalTok{* 5. Mechanical Oracle Matrix (State 2 Phase Flipped {-} Clipped at +/{-}12V Rails)}
+\NormalTok{E\_Inv2 Node\_2\_Op\_Out 0 VALUE=\{LIMIT(100000 * (0 {-} V(Node\_2\_In)), {-}12, 12)\}}
+\NormalTok{R\_Inv\_In   Node\_2\_In     Node\_2\_Oracle \{RMATCH\}}
+\NormalTok{R\_Inv\_Feed Node\_2\_Op\_Out Node\_2\_Oracle \{RMATCH\}}
 
-\NormalTok{* 4. Central Diffusion Summing Mixer (Computes Mean and Multiplies by 2)}
+\NormalTok{* 6. Central Diffusion Summing Mixer (Computes Mean {-} Clipped at +/{-}12V Rails)}
 \NormalTok{R\_Sum0 Node\_0\_In Sum\_Node \{RMATCH\}}
 \NormalTok{R\_Sum1 Node\_1\_In Sum\_Node \{RMATCH\}}
 \NormalTok{R\_Sum2 Node\_2\_Oracle Sum\_Node \{RMATCH\}}
 \NormalTok{R\_Sum3 Node\_3\_In Sum\_Node \{RMATCH\}}
 
-\NormalTok{X\_Mixer Sum\_Node Mean\_Out VCC VEE TL074}
+\NormalTok{E\_Mixer Mean\_Out 0 VALUE=\{LIMIT(100000 * (0 {-} V(Sum\_Node)), {-}12, 12)\}}
 \NormalTok{R\_Feedback Sum\_Node Mean\_Out \{RMATCH\}}
 
-\NormalTok{* 5. Envelope Demodulator \& Early Termination Peak Check}
-\NormalTok{D\_Det0 Node\_2\_Oracle Envelope\_0 1N4148}
+\NormalTok{* 7. Envelope Demodulator}
+\NormalTok{D\_Det0 Node\_2\_Oracle Envelope\_0 D\_IDEAL}
 \NormalTok{C\_Smooth0 Envelope\_0 0 10nF}
 \NormalTok{R\_Bleed0 Envelope\_0 0 100k}
 
-\NormalTok{* 6. Power Supply Rails}
-\NormalTok{V\_Pos VCC 0 12}
-\NormalTok{V\_Neg VEE 0 {-}12}
-
-\NormalTok{.TRAN 0 2m 0 1u}
+\NormalTok{.TRAN 0 10m 0 1u}
 \NormalTok{.END}
 \end{Highlighting}
 \end{Shaded}
