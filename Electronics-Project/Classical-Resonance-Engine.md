@@ -17,7 +17,7 @@ This circuit strips away that vocabulary. We represent a 2-bit database ($N = 2^
 *   **The Diffusion Mixer = DC Offset Inversion:** A central inverting summing amplifier continuously adds the signals from all four nodes. This calculates the global arithmetic mean ($\mu$). By feeding the inverted mean back into the array, the circuit performs an instantaneous, continuous **Inversion About the Average**:
 
 $$
-V_{\text{out_channel}} = 2V_{\text{mean}} - V_{\text{in_channel}}
+V_{\text{out\_channel}} = 2V_{\text{mean}} - V_{\text{in\_channel}}
 $$
 
 ### Continuous Early Termination (Why Analog Beats the Textbooks)
