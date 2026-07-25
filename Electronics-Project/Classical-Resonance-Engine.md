@@ -16,9 +16,8 @@ This circuit strips away that vocabulary. We represent a 2-bit database ($N = 2^
 *   **The Oracle = $180^\circ$ ($\pi$ Radian) Phase Shift:** Selecting a "target" coordinate via a mechanical switch routes that specific channel through a unity-gain inverting amplifier ($V_{\text{out}} = -V_{\text{in}}$). It flips the sign of that coordinate's amplitude.
 *   **The Diffusion Mixer = DC Offset Inversion:** A central inverting summing amplifier continuously adds the signals from all four nodes. This calculates the global arithmetic mean ($\mu$). By feeding the inverted mean back into the array, the circuit performs an instantaneous, continuous **Inversion About the Average**:
 
-$$
-V_{\text{out\_channel}} = 2V_{\text{mean}} - V_{\text{in\_channel}}
-$$
+```math
+$V_{\text{out\_channel}} = 2V_{\text{mean}} - V_{\text{in\_channel}}$```
 
 ### Continuous Early Termination (Why Analog Beats the Textbooks)
 Because these are macroscopic, classical voltage signals, there is no "wavefunction collapse." A serious hobbyist can use a standard oscilloscope probe or a window comparator to monitor the nodes continuously without altering the data trajectory. 
