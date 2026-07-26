@@ -1,0 +1,3 @@
+= Grover’s algorithm as an array search for AMD Zen 5
+
+This ATS/Postiats implementation is a work in progress.
