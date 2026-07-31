@@ -21,11 +21,4 @@ package Grover_Fixed_Processor is
       Amplitudes  : in     Fixed_Amplitude_Array;
       Peak_Index  :    out Index_Type);
 
---   procedure Execute_Search_Benchmark (
---      Data          : in     Data_Array;
---      Target        : in     Integer;
---      Found_Index   :    out Index_Type;
---      Success       :    out Boolean;
---      Elapsed_Time  :    out Ada.Real_Time.Time_Span);
-
 end Grover_Fixed_Processor;
