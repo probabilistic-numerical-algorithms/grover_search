@@ -44,6 +44,16 @@ algorithm whenever there is an indication it has reached a conclusion.
 This is true whether the hardware is analog or digital. Our
 implementations look for such indications.
 
+***
+
+_But (we now realize) a brute force parallel search is even faster._
+And must be faster than _any_ “quantum” algorithm. It takes better
+advantage of the hardware, whether the hardware be digital or analog.
+
+Nevertheless, the algorithm presented here is of scientific interest.
+
+***
+
 IMPORTANT: I AM A DISABLED SENIOR CITIZEN. PLEASE DO NOT BOTHER ME.
 ALL OF THIS STUFF IS DONATED TO THE PUBLIC DOMAIN FOR OTHERS TO DEAL
 WITH WHILE LEAVING ME ALONE. You can read snapshots of my research at
