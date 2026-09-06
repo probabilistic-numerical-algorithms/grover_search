@@ -82,7 +82,7 @@ electromagnetic field. The different definition leads to the Unified
 Field Theory instead of Special Relativity, and preserves intuitive
 three-dimensional space and time. The Michelson-Morley experiment
 requires the energy density of electromagnetism also be mass density,
-so the waves will have inertia, and so the whole thing _begins_ with
+so the waves will have inertia. Thus the whole thing _begins_ with
 _dE=c²dm_.] They are solved using Maxwell’s equations at
 https://github.com/chemoelectric/iris-numbers-and-unified-field-theory
 in Volume{nbsp}IV.
