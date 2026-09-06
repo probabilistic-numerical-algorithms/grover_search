@@ -48,9 +48,23 @@ implementations look for such indications.
 
 _But (we now realize) a brute force parallel search is even faster._
 And must be faster than _any_ “quantum” algorithm. It takes better
-advantage of the hardware, whether the hardware be digital or analog.
+advantage of the hardware, whether the hardware be digital or analog,
+for this simple reason: _the oracle alone is a device that solves the
+problem_.
+
+To build a device that executes Grover’s algorithm, or to program a
+device to execute Grover’s algorithm, you must construct an “oracle”
+that already, by itself, solves the problem! It is only superstitions
+decreed by the Church of Complementarity, entirely without
+experimental support, that prevent use of that solution directly,
+instead of as “oracle” in an enormous deep freeze.
 
 Nevertheless, the algorithm presented here is of scientific interest.
+It demonstrates that even in the algorithm of the Josephson deep
+freeze you can stop at any time, and that you do not need the
+Josephson deep freeze. _There is no such thing as a “wavefunction.”
+Niels Bohr was a cult founder. Until you break free of his doctrines,
+you belong to a cult rather than a scientific community._
 
 ***
 
