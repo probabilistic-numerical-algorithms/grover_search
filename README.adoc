@@ -66,9 +66,28 @@ Josephson deep freeze. _There is no such thing as a “wavefunction.”
 Niels Bohr was a cult founder. Until you break free of his doctrines,
 you belong to a cult rather than a scientific community._
 
+Also, it is possible your oracle’s output is difficult to read without
+a phase-lock device to do that reading. In that case, Grover’s design
+may be what you need. However, you need no cryogenics and need not
+worry about _any_ Copenhagen-interpretation doctrines. They are all
+ecclesiastical decrees without experimental support. If you try to
+find foundational experiments to back them up, you will not find
+these. You will find only the supposed foundational experiments of
+“quantum” physics, which are merely experiments physicists did not
+solve using Maxwell’s equations.footnote:[Physicists never developed
+the habit of using Maxwell’s equations rigorously. Einstein, for
+instance, unrigorously treated _c_ as “the speed of light in a
+vacuum.” It is no such thing. It is the speed of waves in a Maxwellian
+electromagnetic field. The different definition leads to the Unified
+Field Theory instead of Special Relativity, and preserves intuitive
+three-dimensional space and time.] They are solved using Maxwell’s
+equations at
+https://github.com/chemoelectric/iris-numbers-and-unified-field-theory
+in Volume{nbsp}IV.
+
 ***
 
 IMPORTANT: I AM A DISABLED SENIOR CITIZEN. PLEASE DO NOT BOTHER ME.
 ALL OF THIS STUFF IS DONATED TO THE PUBLIC DOMAIN FOR OTHERS TO DEAL
 WITH WHILE LEAVING ME ALONE. You can read snapshots of my research at
-https://archive.org/details/unified-field-theory/
+https://github.com/chemoelectric/iris-numbers-and-unified-field-theory
