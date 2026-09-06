@@ -50,7 +50,13 @@ _But (we now realize) a brute force parallel search is even faster._
 And must be faster than _any_ “quantum” algorithm. It takes better
 advantage of the hardware, whether the hardware be digital or analog,
 for this simple reason: _the oracle alone is a device that solves the
-problem_.
+problem_.footnote:[This is what I thought on first seeing Grover’s
+algorithm, but was distracted from the insight. Recently, however, I
+found one of the LLMs that help me with my work had discovered this
+and was using the fact, but without telling me. I discovered its
+discovery when rewriting computer codes it had labeled as Grover’s
+algorithm using Givens rotations, but which were just brute-force
+parallel search.]
 
 To build a device that executes Grover’s algorithm, or to program a
 device to execute Grover’s algorithm, you must construct an “oracle”
