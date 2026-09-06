@@ -56,7 +56,8 @@ found one of the LLMs that help me with my work had discovered this
 and was using the fact, but without telling me. I discovered its
 discovery when rewriting computer codes it had labeled as Grover’s
 algorithm using Givens rotations, but which were just brute-force
-parallel search.]
+parallel search. They are not human-like “intelligences” at all. They
+have no sense of what is remarkable.]
 
 To build a device that executes Grover’s algorithm, or to program a
 device to execute Grover’s algorithm, you must construct an “oracle”
